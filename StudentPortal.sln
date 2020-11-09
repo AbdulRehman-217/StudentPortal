@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentPortal", "StudentPor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudenPortal.Api", "StudenPortal.Api\StudenPortal.Api.csproj", "{681E229B-E8C6-4B80-A70F-6DCB5E7115F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentPortal.Models", "StudentPortal.Models\StudentPortal.Models.csproj", "{10D8C33A-0DBC-4BCF-8BBE-ADFAF6C723E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{681E229B-E8C6-4B80-A70F-6DCB5E7115F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{681E229B-E8C6-4B80-A70F-6DCB5E7115F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{681E229B-E8C6-4B80-A70F-6DCB5E7115F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10D8C33A-0DBC-4BCF-8BBE-ADFAF6C723E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10D8C33A-0DBC-4BCF-8BBE-ADFAF6C723E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10D8C33A-0DBC-4BCF-8BBE-ADFAF6C723E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10D8C33A-0DBC-4BCF-8BBE-ADFAF6C723E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
