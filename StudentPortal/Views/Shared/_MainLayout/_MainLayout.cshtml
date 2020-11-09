@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+    <title>@ViewBag.Title</title>
+    <!-- This page CSS -->
+    <!-- This page CSS -->
+    <link href="~/Assests/node_modules/morrisjs/morris.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="~/Assests/dist/css/style.min.css" rel="stylesheet">
+    <!-- Dashboard 1 Page CSS -->
+    <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Assests/dist/css/pages/dashboard4.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    @RenderSection("styles", false)
+
+</head>
+<body class="horizontal-nav boxed skin-megna fixed-layout">
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader__figure"></div>
+            <p class="loader__label">Student Portal</p>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <partial name="_MainLayoutHeader.cshtml" />
+        <partial name="_MainLayoutTopBar.cshtml" />
+        <div class="page-wrapper">
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </div>
+        <footer class="footer">
+            © 2020 Student Portal by Shan Ahmad
+        </footer>
+    </div>
+    <script src="~/Assests/node_modules/jquery/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap popper Core JavaScript -->
+    <script src="~/Assests/node_modules/popper/popper.min.js"></script>
+    <script src="~/Assests/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="~/Assests/dist/js/perfect-scrollbar.jquery.min.js"></script>
+    <!--Wave Effects -->
+    <script src="dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="~/Assests/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+    <!--Sky Icons JavaScript -->
+    <script src="~/Assests/node_modules/skycons/skycons.js"></script>
+    <!--morris JavaScript -->
+    <script src="~/Assests/node_modules/raphael/raphael-min.js"></script>
+    <script src="~/Assests/node_modules/morrisjs/morris.min.js"></script>
+    <script src="~/Assests/node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <!-- Chart JS -->
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="~/Assests/js/dashboard4.js"></script>
+    <script src="~/Assests/dist/js/custom.min.js"></script>
+
+    @RenderSection("scripts", false)
+</body>
+</html>

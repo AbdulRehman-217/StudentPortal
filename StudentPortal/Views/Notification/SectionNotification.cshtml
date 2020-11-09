@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewData["Title"] = "SectionNotification";
+    Layout = "~/Views/Shared/_MainLayout/_MainLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Specific Students</h4>
+                <form class="mt-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Title</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Title">
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea class="form-control" rows="5"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="Select">Select Batch</label>
+                        <select class="form-control" id="Select" required="">
+                            <option value="" disabled="" selected="" hidden="">Select batch</option>
+                            <option>2016-2020</option>
+                            <option>2017-2021</option>
+                            <option>2018-2022</option>
+                            <option>2019-2023</option>
+                            <option>2020-2024</option>
+                            <option>Others</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Select">Select Class</label>
+                        <select class="form-control" id="Select" required="">
+                            <option value="" disabled="" selected="" hidden="">Select class</option>
+                            <option>BSCS</option>
+                            <option>MSCS</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Select">Select Section</label>
+                        <select class="form-control" id="Select" required="">
+                            <option value="" disabled="" selected="" hidden="">Select section</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>E1</option>
+                            <option>E2</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+   
+                    <div class="form-group">
+                        <label>Select Message Type</label>
+                        <select class="form-control custom-select">
+                            <option value="" disabled="" selected="" hidden="">Select message type</option>
+                            <option>Fee notice</option>
+                            <option>Holiday notice</option>
+                            <option>Exams notice</option>
+                            <option>Events notice</option>
+                            <option>Result notice</option>
+                            <option>Time table notice</option>
+                            <option>Entry test notice</option>
+                            <option>Admission notice</option>
+                            <option>Others</option>
+                        </select>
+                    </div>
+                    <div class="custom-control custom-checkbox mr-sm-2 mb-3">
+                        <input type="checkbox" class="custom-control-input" id="checkbox0" value="check">
+                        <label class="custom-control-label" for="checkbox0">Is Important?</label>
+                    </div>
+                    <button type="submit" class="btn float-right btn-primary">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

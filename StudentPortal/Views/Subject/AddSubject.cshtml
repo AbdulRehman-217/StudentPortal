@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewData["Title"] = "AddSubject";
+    Layout = "~/Views/Shared/_MainLayout/_MainLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Add New Subject</h4>
+                <form class="mt-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Subject Name</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1"  placeholder="Enter Subject Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="Professor">Professor Name</label>
+                        <input type="text" class="form-control" id="Professor"  placeholder="Enter Professor Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Select Semester</label>
+                        <select class="form-control custom-select">
+                            <option value="" disabled="" selected="" hidden="">Select message type</option>
+                            <option>Fee notice</option>
+                            <option>Holiday notice</option>
+                            <option>Exams notice</option>
+                            <option>Events notice</option>
+                            <option>Result notice</option>
+                            <option>Time table notice</option>
+                            <option>Entry test notice</option>
+                            <option>Admission notice</option>
+                            <option>Others</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn float-right btn-primary">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
