@@ -15,9 +15,11 @@ namespace StudentPortal.Models.Models
         {
         }
 
+        public virtual DbSet<DeviceTokens> DeviceTokens { get; set; }
         public virtual DbSet<ForgotPassword> ForgotPassword { get; set; }
         public virtual DbSet<Logins> Logins { get; set; }
         public virtual DbSet<Lookup> Lookup { get; set; }
+        public virtual DbSet<Notifications> Notifications { get; set; }
         public virtual DbSet<UserProfile> UserProfile { get; set; }
         public virtual DbSet<UserRoles> UserRoles { get; set; }
 
@@ -26,12 +28,26 @@ namespace StudentPortal.Models.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=StudentPortal.mssql.somee.com; Database=StudentPortal; User Id=ShanAhmad_SQLLogin_1; password=izinupop7p;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-JFIC54H\\SQLEXPRESS; Database=StudentPortal;Trusted_Connection=True;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<DeviceTokens>(entity =>
+            {
+                entity.HasKey(e => e.UserId);
+
+                entity.Property(e => e.UserId).ValueGeneratedNever();
+
+                entity.Property(e => e.DeviceToken).IsRequired();
+
+                entity.HasOne(d => d.User)
+                    .WithOne(p => p.DeviceTokens)
+                    .HasForeignKey<DeviceTokens>(d => d.UserId)
+                    .HasConstraintName("FK_DeviceTokens_UserProfile");
+            });
+
             modelBuilder.Entity<ForgotPassword>(entity =>
             {
                 entity.HasKey(e => e.LoginId);
@@ -55,6 +71,8 @@ namespace StudentPortal.Models.Models
                 entity.Property(e => e.IsActive)
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.RollNo).HasMaxLength(50);
 
                 entity.Property(e => e.UserName).HasMaxLength(200);
 
@@ -81,13 +99,31 @@ namespace StudentPortal.Models.Models
                     .HasMaxLength(100);
             });
 
+            modelBuilder.Entity<Notifications>(entity =>
+            {
+                entity.HasKey(e => e.NotificationId);
+
+                entity.Property(e => e.TargetScreen).HasMaxLength(50);
+
+                entity.Property(e => e.Title).HasMaxLength(50);
+
+                entity.Property(e => e.Type).HasMaxLength(50);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Notifications)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_Notifications_UserProfile");
+            });
+
             modelBuilder.Entity<UserProfile>(entity =>
             {
                 entity.HasKey(e => e.UserId);
 
-                entity.Property(e => e.Address1).HasMaxLength(150);
+                entity.Property(e => e.Address).HasMaxLength(150);
 
-                entity.Property(e => e.Address2).HasMaxLength(150);
+                entity.Property(e => e.BatchEnd).HasMaxLength(10);
+
+                entity.Property(e => e.BatchStart).HasMaxLength(10);
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
@@ -99,7 +135,11 @@ namespace StudentPortal.Models.Models
 
                 entity.Property(e => e.Phone).HasMaxLength(25);
 
-                entity.Property(e => e.ZipCode).HasMaxLength(10);
+                entity.Property(e => e.Program).HasMaxLength(10);
+
+                entity.Property(e => e.Section).HasMaxLength(5);
+
+                entity.Property(e => e.Semester).HasMaxLength(10);
             });
 
             modelBuilder.Entity<UserRoles>(entity =>

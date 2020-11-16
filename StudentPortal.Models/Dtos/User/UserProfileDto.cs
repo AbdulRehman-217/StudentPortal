@@ -1,31 +1,28 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using StudentPortal.Models.Dtos.DeviceToken;
 using StudentPortal.Models.Dtos.Login;
 
 namespace StudentPortal.Models.Dtos.User
 {
     public class UserProfileDto : LoginDto
     {
-        [Required]
-        [StringLength(50)]
+       
+        public long UserId { get; set; }
         public string FirstName { get; set; }
-
-        [Required]
-        [StringLength(50)]
         public string LastName { get; set; }
-
-        [StringLength(25)]
         public string Phone { get; set; }
+        public string Address { get; set; }
+        public string ProfileUrl { get; set; }
+        public string About { get; set; }
+        public string Semester { get; set; }
+        public string Section { get; set; }
+        public string BatchStart { get; set; }
+        public string BatchEnd { get; set; }
+        public string Program { get; set; }
 
         [Required]
-        [StringLength(150)]
-        public string Address1 { get; set; }
-        public string Address2 { get; set; }
-        public string ProfileUrl { get; set; }
-        public int? CityId { get; set; }
-        public int? CountryId { get; set; }
-        public int? StateId { get; set; }
-        public string ZipCode { get; set; }
-        public string About { get; set; }
+        public  string DeviceToken { get; set; }
 
     }
 }

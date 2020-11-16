@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -24,12 +25,15 @@ namespace StudentPortal.Api.Controllers
         private readonly IConfiguration _config;
         private readonly IMapper _mapper;
         private readonly StudentPortalContext _context;
+        private readonly StudenPortal.Api.TokenManager.TokenManager _tokenManager;
 
-        public AuthController(IMapper mapper, StudentPortalContext context, IConfiguration config)
+
+        public AuthController(IMapper mapper, StudentPortalContext context, IConfiguration config, IHttpContextAccessor httpContextAccessor)
         {
             _config = config;
             _mapper = mapper;
             _context = context;
+            _tokenManager = new StudenPortal.Api.TokenManager.TokenManager(httpContextAccessor);
         }
 
         [NonAction]
@@ -59,30 +63,31 @@ namespace StudentPortal.Api.Controllers
         {
             var response = new ResponseDto<LoginResponseDto>();
             var result = await (from logins in _context.Logins
-                join userRoles in _context.UserRoles on logins.RoleId equals userRoles.RoleId
-                join profile in _context.UserProfile on logins.UserId equals profile.UserId
-                where logins.Email.Equals(authUserDto.Email) && logins.Password == authUserDto.Password
-                select new LoginResponseDto
-                {
-                    UserId = logins.UserId,
-                    Email = logins.Email,
-                    RoleId = logins.RoleId,
-                    Role = userRoles.Title,
-                    IsActive = logins.IsActive.Value,
-                    IsAccountVerified = logins.IsAccountVerified,
-                    FirstName = profile.FirstName,
-                    LastName = profile.LastName,
-                    Phone = profile.Phone,
-                    Address1 = profile.Address1,
-                    Address2 = profile.Address2,
-                    ProfileUrl = profile.ProfileUrl,
-                    CityId = profile.CityId,
-                    CountryId = profile.CountryId,
-                    StateId = profile.StateId,
-                    ZipCode = profile.ZipCode,
-                    About = profile.About,
-                    CreatedDate = profile.CreatedDate
-                }).FirstOrDefaultAsync();
+                                join userRoles in _context.UserRoles on logins.RoleId equals userRoles.RoleId
+                                join profile in _context.UserProfile on logins.UserId equals profile.UserId
+                                where logins.Email.Equals(authUserDto.Email) && logins.Password == authUserDto.Password
+                                select new LoginResponseDto
+                                {
+                                    UserId = logins.UserId,
+                                    Email = logins.Email,
+                                    RoleId = logins.RoleId,
+                                    Role = userRoles.Title,
+                                    IsActive = logins.IsActive.Value,
+                                    IsAccountVerified = logins.IsAccountVerified,
+                                    FirstName = profile.FirstName,
+                                    LastName = profile.LastName,
+                                    Phone = profile.Phone,
+                                    Address = profile.Address,
+                                    Semester = profile.Semester,
+                                    ProfileUrl = profile.ProfileUrl,
+                                    Section = profile.Section,
+                                    Program = profile.Program,
+                                    BatchStart = profile.BatchStart,
+                                    BatchEnd = profile.BatchEnd,
+                                    About = profile.About,
+                                    RollNo = logins.RollNo,
+                                    CreatedDate = profile.CreatedDate
+                                }).FirstOrDefaultAsync();
             if (!(result is null))
             {
                 response.Data = result;
@@ -92,6 +97,53 @@ namespace StudentPortal.Api.Controllers
             response.Data = null;
             response.Status = 0;
             response.Message = "Invalid email or password";
+            return Ok(response);
+        }
+
+        [HttpPut]
+        [Authorize]
+        public async Task<IActionResult> UpdateToken(string token)
+        {
+            var response = new ResponseDto<bool>();
+            var userId = _tokenManager.GetUserId();
+            var tokenFromRepo = await _context.DeviceTokens.FirstOrDefaultAsync(x => x.UserId == userId);
+            if (tokenFromRepo is null)
+            {
+                var addToken = new DeviceTokens()
+                {
+                    UserId = userId,
+                    DeviceToken = token
+                };
+                await _context.DeviceTokens.AddAsync(addToken);
+            }
+            else
+            {
+                tokenFromRepo.DeviceToken = token;
+            }
+
+            await _context.SaveChangesAsync();
+            response.Data = true;
+            return Ok(response);
+        }
+
+        [HttpDelete]
+        [Authorize]
+        public async Task<IActionResult> RemoveToken()
+        {
+            var response = new ResponseDto<bool>();
+            var userId = _tokenManager.GetUserId();
+            var tokenFromRepo = await _context.DeviceTokens.FirstOrDefaultAsync(x => x.UserId == userId);
+            if (tokenFromRepo is null)
+            {
+                response.Data = false;
+                response.Message = "Token Not Exist";
+                response.Status = 0;
+                return Ok(response);
+            }
+
+            _context.DeviceTokens.Remove(tokenFromRepo);
+            await _context.SaveChangesAsync();
+            response.Data = true;
             return Ok(response);
         }
     }

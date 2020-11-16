@@ -49,6 +49,9 @@ namespace StudentPortal.Api.Controllers
                 Email = userDto.Email,
                 RoleId = 2
             };
+           
+            mapped.DeviceTokens = new DeviceTokens();
+            mapped.DeviceTokens.DeviceToken = userDto.DeviceToken;
             mapped.CreatedDate = DateTime.Now;
             mapped.Logins.Add(loginDetail);
             await _context.UserProfile.AddAsync(mapped);

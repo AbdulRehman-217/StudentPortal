@@ -7,7 +7,9 @@ namespace StudentPortal.Models.Dtos.Login
 {
     public class LoginDto
     {
-        //public string UserName { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string RollNo { get; set; }
         [Required]
         [EmailAddress]
         [StringLength(100)]

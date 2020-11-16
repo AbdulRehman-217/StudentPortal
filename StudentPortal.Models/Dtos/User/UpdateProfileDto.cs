@@ -20,8 +20,7 @@ namespace StudentPortal.Models.Dtos.User
 
         [Required]
         [StringLength(150)]
-        public string Address1 { get; set; }
-        public string Address2 { get; set; }
+        public string Address { get; set; }
         public string ProfileUrl { get; set; }
         public string About { get; set; }
     }
