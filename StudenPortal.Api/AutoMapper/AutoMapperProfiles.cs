@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using StudentPortal.Models.Dtos.Login;
+using StudentPortal.Models.Dtos.Notification;
 using StudentPortal.Models.Dtos.User;
 using StudentPortal.Models.Models;
 
@@ -12,6 +13,7 @@ namespace StudenPortal.AutoMapper
             CreateMap<UserProfile, UserProfileDto>().ReverseMap();
             CreateMap<Logins, LoginDto>().ReverseMap();
             CreateMap<UserProfile, UpdateProfileDto>().ReverseMap();
+            CreateMap<Notifications, NotificationDto>().ReverseMap();
         }
     }
 

@@ -28,7 +28,7 @@ namespace StudentPortal
             services.AddControllersWithViews();
             var mvcBuilder = services.AddControllersWithViews();
             mvcBuilder.AddRazorRuntimeCompilation();
-            services.AddDbContext<StudentPortalContext>(options =>
+            services.AddDbContext<stdportalContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
             services.AddHttpContextAccessor();
         }

@@ -18,10 +18,10 @@ namespace StudentPortal.Api.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly StudentPortalContext _context;
+        private readonly stdportalContext _context;
         private readonly TokenManager _tokenManager;
 
-        public UsersController(IMapper mapper, StudentPortalContext context, IHttpContextAccessor httpContextAccessor)
+        public UsersController(IMapper mapper, stdportalContext context, IHttpContextAccessor httpContextAccessor)
         {
             _mapper = mapper;
             _context = context;

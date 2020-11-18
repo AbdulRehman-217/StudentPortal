@@ -88,7 +88,7 @@ namespace StudenPortal.Api
                     };
                 });
             //End JWT
-            services.AddDbContext<StudentPortalContext>(options =>
+            services.AddDbContext<stdportalContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
             services.AddHttpContextAccessor();
         }

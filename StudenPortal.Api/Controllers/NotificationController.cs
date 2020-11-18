@@ -20,10 +20,10 @@ namespace StudenPortal.Api.Controllers
     {
 
         private readonly IMapper _mapper;
-        private readonly StudentPortalContext _context;
+        private readonly stdportalContext _context;
         private readonly TokenManager.TokenManager _tokenManager;
 
-        public NotificationController(IMapper mapper, StudentPortalContext context, IHttpContextAccessor httpContextAccessor)
+        public NotificationController(IMapper mapper, stdportalContext context, IHttpContextAccessor httpContextAccessor)
         {
             _mapper = mapper;
             _context = context;
@@ -46,8 +46,54 @@ namespace StudenPortal.Api.Controllers
             response.Message = "No Notification Found";
             response.Status = 0;
             return Ok(response);
-
         }
 
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetAllNotification(bool IsVisitor,bool IsAllStudent)
+        {
+            var response = new ResponseDto<List<NotificationDto>>();
+            var notifications = await _context.Notifications.Where(x => x.IsAllStudentNotification == IsAllStudent && x.IsVisitorNotification == IsVisitor).ToListAsync();
+            if (notifications.Count > 0)
+            {
+                response.Data = _mapper.Map<List<NotificationDto>>(notifications);
+                return Ok(response);
+            }
+            response.Data = new List<NotificationDto>();
+            response.Message = "No Notification Found";
+            response.Status = 0;
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetTimeTable()
+        {
+            var response = new ResponseDto<List<TimeTableDto>>();
+            var notifications = await (from t in _context.TimeTable
+                join noti in _context.Notifications on t.NotificationId equals noti.NotificationId
+                                       select new TimeTableDto()
+                                       {
+                                           CreatedDate = t.CreatedDate,
+                                           FileUrl = t.FileUrl,
+                                           Notification = new NotificationDto()
+                                           {
+                                               Message = noti.Message,
+                                               Type = noti.Type,
+                                               TargetScreen = noti.TargetScreen,
+                                               Title = noti.Title
+                                           }
+                                       }
+                ).ToListAsync();
+            if (notifications.Count > 0)
+            {
+                response.Data = notifications;
+                return Ok(response);
+            }
+            response.Data = new List<TimeTableDto>();
+            response.Message = "No Notification Found";
+            response.Status = 0;
+            return Ok(response);
+        }
     }
 }

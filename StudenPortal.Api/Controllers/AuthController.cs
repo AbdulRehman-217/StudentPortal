@@ -24,11 +24,11 @@ namespace StudentPortal.Api.Controllers
     {
         private readonly IConfiguration _config;
         private readonly IMapper _mapper;
-        private readonly StudentPortalContext _context;
+        private readonly stdportalContext _context;
         private readonly StudenPortal.Api.TokenManager.TokenManager _tokenManager;
 
 
-        public AuthController(IMapper mapper, StudentPortalContext context, IConfiguration config, IHttpContextAccessor httpContextAccessor)
+        public AuthController(IMapper mapper, stdportalContext context, IConfiguration config, IHttpContextAccessor httpContextAccessor)
         {
             _config = config;
             _mapper = mapper;

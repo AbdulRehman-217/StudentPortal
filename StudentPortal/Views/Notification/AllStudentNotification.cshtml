@@ -1,42 +1,100 @@
-﻿
+﻿@model StudentPortal.Models.NotificationVm
 @{
     ViewData["Title"] = "AllStudentNotification";
     Layout = "~/Views/Shared/_MainLayout/_MainLayout.cshtml";
 }
+@section styles
+{
+    <link href="~/Assests/node_modules/dropify/dist/css/dropify.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Assests/node_modules/dropify/dist/js/dropify.min.js"></script>
+    <script>
+        $('.dropify').dropify();
+        $("form#Students").submit(function (e) {
+            debugger;
+            e.preventDefault();
+            var flag = $("#Students").valid();
+            if (!(flag)) {
+                e.preventDefault();
+            } else {
+                //showLoader();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: '@Url.Action("StudentNotification", "Notification")',
+                    type: 'POST',
+                    data: formData,
+                    success: function(data) {
+                        onSaveUserSuccess(data);
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });
+            }
+        });
+
+        function onSaveUserSuccess(data) {
+            // HideLoader();
+            alert("success");
+        }
+
+        $('.time-table-file').hide();
+        function showFile() {
+            $('.time-table-file').hide();
+            if ($("#NotificationDto_Type").val() === "Time table notice") {
+                $('.time-table-file').show();
+
+            }
+            
+        }
+    </script>
+}
+
 
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">All Student</h4>
-                <form class="mt-4">
+                <form class="mt-4" id="Students">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Title</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Title">
+                        <label>Title</label>
+                        <input type="text" class="form-control" asp-for="NotificationDto.Title" aria-describedby="emailHelp" placeholder="Enter Title">
+                        <span asp-validation-for="NotificationDto.Title" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label>Message</label>
-                        <textarea class="form-control" rows="5"></textarea>
+                        <textarea class="form-control" rows="5" asp-for="NotificationDto.Message"></textarea>
+                        <span asp-validation-for="NotificationDto.Message" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label>Select Message Type</label>
-                        <select class="form-control custom-select">
+                        <select class="form-control custom-select" asp-for="NotificationDto.Type" onchange="showFile()">
                             <option value="" disabled="" selected="" hidden="">Select message type</option>
-                            <option>Fee notice</option>
-                            <option>Holiday notice</option>
-                            <option>Exams notice</option>
-                            <option>Events notice</option>
-                            <option>Result notice</option>
-                            <option>Time table notice</option>
-                            <option>Entry test notice</option>
-                            <option>Admission notice</option>
-                            <option>Others</option>
+                            <option value="Fee notice">Fee notice</option>
+                            <option value="Holiday notice">Holiday notice</option>
+                            <option value="Exams notice">Exams notice</option>
+                            <option value="Events notice">Events notice</option>
+                            <option value="Result notice">Result notice</option>
+                            <option value="Time table notice">Time table notice</option>
+                            <option value="Entry test notice">Entry test notice</option>
+                            <option value="Admission notice">Admission notice</option>
+                            <option value="Others">Others</option>
                         </select>
+                        <span asp-validation-for="NotificationDto.Type" class="text-danger"></span>
+                    </div>
+                    <div class="form-group time-table-file">
+                        <label class="card-title">Food Truck Banner</label>
+                        @*<label for="input-file-max-fs">You can add a max file size</label>*@
+                        <input type="file" asp-for="TimeTableFile" class="dropify" data-max-file-size="5M" data-allowed-file-extensions="xlsx xlsm xlsb pdf doc docx" />
+                        <span asp-validation-for="TimeTableFile" class="text-danger"></span>
                     </div>
                     <div class="custom-control custom-checkbox mr-sm-2 mb-3">
-                        <input type="checkbox" class="custom-control-input" id="checkbox0" value="check">
-                        <label class="custom-control-label" for="checkbox0">Is Important?</label>
+                        <input type="checkbox" class="custom-control-input" asp-for="NotificationDto.IsImportant" value="check">
+                        <label class="custom-control-label" asp-for="NotificationDto.IsImportant">Is Important?</label>
                     </div>
+                    @*<iframe src="~/Uploads/Test.pdf"></iframe>*@
                     <button type="submit" class="btn float-right btn-primary">Send</button>
                 </form>
             </div>

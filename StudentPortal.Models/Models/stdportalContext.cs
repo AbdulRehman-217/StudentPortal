@@ -20,6 +20,7 @@ namespace StudentPortal.Models.Models
         public virtual DbSet<Logins> Logins { get; set; }
         public virtual DbSet<Lookup> Lookup { get; set; }
         public virtual DbSet<Notifications> Notifications { get; set; }
+        public virtual DbSet<TimeTable> TimeTable { get; set; }
         public virtual DbSet<UserProfile> UserProfile { get; set; }
         public virtual DbSet<UserRoles> UserRoles { get; set; }
 
@@ -126,6 +127,22 @@ namespace StudentPortal.Models.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Notifications_UserProfile");
+            });
+
+            modelBuilder.Entity<TimeTable>(entity =>
+            {
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.FileUrl).IsRequired();
+
+                entity.Property(e => e.IsActive)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.HasOne(d => d.Notification)
+                    .WithMany(p => p.TimeTable)
+                    .HasForeignKey(d => d.NotificationId)
+                    .HasConstraintName("FK_TimeTable_Notifications");
             });
 
             modelBuilder.Entity<UserProfile>(entity =>

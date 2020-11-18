@@ -118,6 +118,20 @@
     <Content Include="wwwroot\Assests\node_modules\datatables.net-bs4\css\dataTables.bootstrap4.min.css" />
     <Content Include="wwwroot\Assests\node_modules\datatables.net-bs4\css\responsive.dataTables.min.css" />
     <Content Include="wwwroot\Assests\node_modules\datatables.net-bs4\package.json" />
+    <Content Include="wwwroot\Assests\node_modules\dropify\dist\css\demo.css" />
+    <Content Include="wwwroot\Assests\node_modules\dropify\dist\css\dropify.css" />
+    <Content Include="wwwroot\Assests\node_modules\dropify\dist\css\dropify.min.css" />
+    <Content Include="wwwroot\Assests\node_modules\dropify\dist\fonts\dropify.eot" />
+    <Content Include="wwwroot\Assests\node_modules\dropify\dist\fonts\dropify.ttf" />
+    <Content Include="wwwroot\Assests\node_modules\dropify\dist\fonts\dropify.woff" />
+    <Content Include="wwwroot\Assests\node_modules\dropify\index.html" />
+    <Content Include="wwwroot\Assests\node_modules\dropify\package.json" />
+    <Content Include="wwwroot\Assests\node_modules\dropify\src\fonts\dropify.eot" />
+    <Content Include="wwwroot\Assests\node_modules\dropify\src\fonts\dropify.ttf" />
+    <Content Include="wwwroot\Assests\node_modules\dropify\src\fonts\dropify.woff" />
+    <Content Include="wwwroot\Assests\node_modules\dropify\src\images\cover.jpg" />
+    <Content Include="wwwroot\Assests\node_modules\dropify\src\images\test-image-1.jpg" />
+    <Content Include="wwwroot\Assests\node_modules\dropify\src\images\test-image-2.jpg" />
     <Content Include="wwwroot\Assests\node_modules\jquery-datatables-editable\datatables.css" />
     <Content Include="wwwroot\Assests\node_modules\jquery-sparkline\jquery.charts-sparkline.js" />
     <Content Include="wwwroot\Assests\node_modules\jquery-sparkline\jquery.sparkline.min.js" />
@@ -214,6 +228,25 @@
     <None Include="wwwroot\Assests\node_modules\datatables.net-bs4\js\dataTables.bootstrap4.min.js" />
     <None Include="wwwroot\Assests\node_modules\datatables.net-bs4\js\dataTables.responsive.min.js" />
     <None Include="wwwroot\Assests\node_modules\datatables.net-bs4\Readme.md" />
+    <None Include="wwwroot\Assests\node_modules\dropify\.gitignore" />
+    <None Include="wwwroot\Assests\node_modules\dropify\dist\fonts\dropify.svg" />
+    <None Include="wwwroot\Assests\node_modules\dropify\dist\js\dropify.js" />
+    <None Include="wwwroot\Assests\node_modules\dropify\dist\js\dropify.min.js" />
+    <None Include="wwwroot\Assests\node_modules\dropify\gulpfile.js" />
+    <None Include="wwwroot\Assests\node_modules\dropify\README.md" />
+    <None Include="wwwroot\Assests\node_modules\dropify\src\fonts\dropify.svg" />
+    <None Include="wwwroot\Assests\node_modules\dropify\src\js\dropify.js" />
+    <None Include="wwwroot\Assests\node_modules\dropify\src\sass\demo.scss" />
+    <None Include="wwwroot\Assests\node_modules\dropify\src\sass\demo\helpers\_grid.scss" />
+    <None Include="wwwroot\Assests\node_modules\dropify\src\sass\demo\helpers\_mixins.scss" />
+    <None Include="wwwroot\Assests\node_modules\dropify\src\sass\demo\helpers\_shortcuts.scss" />
+    <None Include="wwwroot\Assests\node_modules\dropify\src\sass\demo\_grid.scss" />
+    <None Include="wwwroot\Assests\node_modules\dropify\src\sass\demo\_normalize.scss" />
+    <None Include="wwwroot\Assests\node_modules\dropify\src\sass\demo\_reset.scss" />
+    <None Include="wwwroot\Assests\node_modules\dropify\src\sass\demo\_typo.scss" />
+    <None Include="wwwroot\Assests\node_modules\dropify\src\sass\demo\_variables.scss" />
+    <None Include="wwwroot\Assests\node_modules\dropify\src\sass\dropify.scss" />
+    <None Include="wwwroot\Assests\node_modules\dropify\src\sass\_dropify-font.scss" />
     <None Include="wwwroot\Assests\node_modules\jquery-datatables-editable\dataTables.bootstrap.js" />
     <None Include="wwwroot\Assests\node_modules\jquery-datatables-editable\jquery.dataTables.js" />
     <None Include="wwwroot\Assests\node_modules\tiny-editable\mindmup-editabletable.js" />
@@ -229,6 +262,10 @@
   <ItemGroup>
     <ProjectReference Include="..\StudentPortal.Models\StudentPortal.Models.csproj" />
     <ProjectReference Include="..\StudentPortal.Utilities\StudentPortal.Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>
 
 </Project>
