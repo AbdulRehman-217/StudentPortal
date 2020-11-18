@@ -1,40 +1,73 @@
-﻿
+﻿@model StudentPortal.Models.Dtos.Notification.NotificationDto
 @{
     ViewData["Title"] = "VisitorNotification";
     Layout = "~/Views/Shared/_MainLayout/_MainLayout.cshtml";
 }
 
+@section scripts{ 
+    <script>
+        $("form#Visitors").submit(function (e) {
+            debugger;
+            e.preventDefault();
+            var flag = $("#Visitors").valid();
+            if (!(flag)) {
+                e.preventDefault();
+            } else {
+                //showLoader();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: '@Url.Action("VisitorNotification", "Notification")',
+                    type: 'POST',
+                    data: formData,
+                    success: function(data) {
+                        onSaveUserSuccess(data);
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });
+            }
+        });
+
+
+
+        function onSaveUserSuccess(data) {
+           // HideLoader();
+           alert("success");
+        }
+    </script>
+}
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Visitor</h4>
-                <form class="mt-4">
+                <form class="mt-4" id="Visitors">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Title</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Title">
+                        <label>Title</label>
+                        <input type="text" class="form-control" asp-for="Title" aria-describedby="emailHelp" placeholder="Enter Title">
                     </div>
                     <div class="form-group">
                         <label>Message</label>
-                        <textarea class="form-control" rows="5"></textarea>
+                        <textarea class="form-control" rows="5" asp-for="Message"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Select Message Type</label>
-                        <select class="form-control custom-select">
+                        <select class="form-control custom-select" asp-for="Type">
                             <option value="" disabled="" selected="" hidden="">Select message type</option>
-                            <option>Fee notice</option>
-                            <option>Holiday notice</option>
-                            <option>Exams notice</option>
-                            <option>Events notice</option>
-                            <option>Result notice</option>
-                            <option>Time table notice</option>
-                            <option>Entry test notice</option>
-                            <option>Admission notice</option>
-                            <option>Others</option>
+                            <option value="Fee notice">Fee notice</option>
+                            <option value="Holiday notice">Holiday notice</option>
+                            <option value="Exams notice">Exams notice</option>
+                            <option value="Events notice">Events notice</option>
+                            <option value="Result notice">Result notice</option>
+                            <option value="Time table notice">Time table notice</option>
+                            <option value="Entry test notice">Entry test notice</option>
+                            <option value="Admission notice">Admission notice</option>
+                            <option value="Others">Others</option>
                         </select>
                     </div>
                     <div class="custom-control custom-checkbox mr-sm-2 mb-3">
-                        <input type="checkbox" class="custom-control-input" id="checkbox0" value="check">
+                        <input type="checkbox" class="custom-control-input" asp-for="IsImportant" value="check">
                         <label class="custom-control-label" for="checkbox0">Is Important?</label>
                     </div>
                     <button type="submit" class="btn float-right btn-primary">Send</button>

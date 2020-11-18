@@ -47,6 +47,7 @@ namespace StudentPortal.Api.Controllers
                 UserName = userDto.FirstName + " " + userDto.LastName,
                 Password = userDto.Password,
                 Email = userDto.Email,
+                RollNo = userDto.RollNo,
                 RoleId = 2
             };
            

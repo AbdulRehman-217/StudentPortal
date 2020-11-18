@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace StudentPortal.Models.Models
 {
-    public partial class StudentPortalContext : DbContext
+    public partial class stdportalContext : DbContext
     {
-        public StudentPortalContext()
+        public stdportalContext()
         {
         }
 
-        public StudentPortalContext(DbContextOptions<StudentPortalContext> options)
+        public stdportalContext(DbContextOptions<stdportalContext> options)
             : base(options)
         {
         }
@@ -28,15 +28,19 @@ namespace StudentPortal.Models.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-JFIC54H\\SQLEXPRESS; Database=StudentPortal;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=67.225.176.164; Database=stdportal; User Id=portal; password=Portal@123;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasAnnotation("Relational:DefaultSchema", "portal");
+
             modelBuilder.Entity<DeviceTokens>(entity =>
             {
                 entity.HasKey(e => e.UserId);
+
+                entity.ToTable("DeviceTokens", "dbo");
 
                 entity.Property(e => e.UserId).ValueGeneratedNever();
 
@@ -52,6 +56,8 @@ namespace StudentPortal.Models.Models
             {
                 entity.HasKey(e => e.LoginId);
 
+                entity.ToTable("ForgotPassword", "dbo");
+
                 entity.Property(e => e.LoginId).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -65,6 +71,8 @@ namespace StudentPortal.Models.Models
             modelBuilder.Entity<Logins>(entity =>
             {
                 entity.HasKey(e => e.LoginId);
+
+                entity.ToTable("Logins", "dbo");
 
                 entity.Property(e => e.Email).HasMaxLength(100);
 
@@ -90,6 +98,8 @@ namespace StudentPortal.Models.Models
 
             modelBuilder.Entity<Lookup>(entity =>
             {
+                entity.ToTable("Lookup", "dbo");
+
                 entity.Property(e => e.LookupType)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -102,6 +112,8 @@ namespace StudentPortal.Models.Models
             modelBuilder.Entity<Notifications>(entity =>
             {
                 entity.HasKey(e => e.NotificationId);
+
+                entity.ToTable("Notifications", "dbo");
 
                 entity.Property(e => e.TargetScreen).HasMaxLength(50);
 
@@ -119,6 +131,8 @@ namespace StudentPortal.Models.Models
             modelBuilder.Entity<UserProfile>(entity =>
             {
                 entity.HasKey(e => e.UserId);
+
+                entity.ToTable("UserProfile", "dbo");
 
                 entity.Property(e => e.Address).HasMaxLength(150);
 
@@ -146,6 +160,8 @@ namespace StudentPortal.Models.Models
             modelBuilder.Entity<UserRoles>(entity =>
             {
                 entity.HasKey(e => e.RoleId);
+
+                entity.ToTable("UserRoles", "dbo");
 
                 entity.Property(e => e.RoleId).ValueGeneratedNever();
 

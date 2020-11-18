@@ -222,7 +222,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StudentPortal.Models\StudentPortal.Models.csproj" />
+    <ProjectReference Include="..\StudentPortal.Utilities\StudentPortal.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

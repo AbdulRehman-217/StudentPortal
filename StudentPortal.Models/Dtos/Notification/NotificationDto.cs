@@ -12,7 +12,7 @@ namespace StudentPortal.Models.Dtos.Notification
         public string Type { get; set; }
         public bool IsRead { get; set; }
         public string TargetScreen { get; set; }
-        public bool IsImportant { get; set; }
+        public bool IsImportant { get; set; } = false;
 
     }
 }

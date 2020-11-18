@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StudentPortal.Models.Models;
 
 namespace StudentPortal
 {
@@ -26,6 +28,9 @@ namespace StudentPortal
             services.AddControllersWithViews();
             var mvcBuilder = services.AddControllersWithViews();
             mvcBuilder.AddRazorRuntimeCompilation();
+            services.AddDbContext<StudentPortalContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
